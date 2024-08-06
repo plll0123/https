@@ -2,9 +2,6 @@ spring.application.name: https
 
 
 spring.config.activate.on-profile: prod1
-name: server1
 
 ---
 spring.config.activate.on-profile: prod2
-name: server2
-
