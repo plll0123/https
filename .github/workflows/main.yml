@@ -6,9 +6,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps: 
-      - name: print hello
-        run: |
-          echo helllllllllllllllllllllllllllllllllllllo
+
+      - name: checkout
+        uses: actions/checkout@v4
 
       - name: java build
         uses: actions/setup-java@v4
