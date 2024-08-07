@@ -1,0 +1,10 @@
+name: http goals
+
+on: push
+
+jobs:
+  runs-on: ubuntu-latest
+  steps: 
+    - name: print hello
+    run: |
+      echo helllllllllllllllllllllllllllllllllllllo
