@@ -9,3 +9,8 @@ jobs:
       - name: print hello
         run: |
           echo helllllllllllllllllllllllllllllllllllllo
+
+      - name: java build
+      - uses: actions/setup-java@v4
+        with:
+          java-version: 21
