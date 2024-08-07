@@ -18,3 +18,7 @@ jobs:
       - name: project build
         run:
           chmod +x gradlew && ./gradlew clean build
+
+      - name: docker build
+        run:
+          docker build --file .docker/prod.Dockerfile --tag prod:latest

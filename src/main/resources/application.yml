@@ -2,8 +2,5 @@ spring:
   application.name: https
 hello: default
 ---
-spring.config.activate.on-profile: prod1
-hello: prod1
----
-spring.config.activate.on-profile: prod2
-hello: prod2
+spring.config.activate.on-profile: prod
+hello: prod
