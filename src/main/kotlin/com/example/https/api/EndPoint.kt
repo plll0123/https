@@ -15,4 +15,5 @@ class EndPoint {
 
     @GetMapping("/health")
     fun ok() = "ok"
+
 }
