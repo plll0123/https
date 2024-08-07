@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api")
-class EndPoint(
-
-) {
+class EndPoint {
     @Value("\${hello}")lateinit var profile: String
 
     @GetMapping("/hello")
     fun hello() = profile
 
+    @GetMapping("/health")
+    fun ok() = "ok"
 }
