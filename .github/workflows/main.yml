@@ -1,0 +1,17 @@
+name: http goals
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: print hello
+        run: |
+          echo helllllllllllllllllllllllllllllllllllllo
+
+      - name: java build
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
