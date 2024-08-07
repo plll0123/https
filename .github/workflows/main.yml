@@ -21,4 +21,4 @@ jobs:
 
       - name: docker build
         run:
-          docker build --file .docker/prod.Dockerfile --tag prod:latest
+          docker build --file .docker/prod.Dockerfile --tag prod:latest .
