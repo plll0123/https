@@ -15,7 +15,6 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '21'
-          cache: 'gradle'
       - name: project build
         run:
           chmod +x gradlew && ./gradlew clean build
