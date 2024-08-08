@@ -33,6 +33,6 @@ jobs:
           context: .
           file: .docker/prod.Dockerfile
           push: true
-          tags: prod
+          tags: ${{ secrets.DOCKER_USERNAME }}/prod
         # run:
         #   docker build --file .docker/prod.Dockerfile --tag prod:latest .
