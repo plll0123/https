@@ -41,5 +41,5 @@ jobs:
           
       - name: push image
         run: |
-          docker push ${{ secrets.ECR_URL }}/prod:latest
+          docker push ${{ secrets.ECR_URL }}/pll0123:latest
         
