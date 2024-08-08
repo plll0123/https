@@ -28,7 +28,7 @@ jobs:
       - name: docker build
         run: |
           docker build --file .docker/prod.Dockerfile -t prod .
-          docker tag prod:latest ${{ secrets.ECR_URL }}/prod:latest
+          docker tag prod:latest ${{ secrets.ECR_URL }}/pll0123:latest
       - name: aws authentication
         uses: aws-actions/configure-aws-credentials@v4
         with:
