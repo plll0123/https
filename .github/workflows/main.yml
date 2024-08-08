@@ -28,7 +28,7 @@ jobs:
       - name: docker build
         run: |
           docker build --file .docker/prod.Dockerfile -t prod .
-          docker tag prod:latest ${{ secrets.ECR_URL }}/backend:latest
+          docker tag prod:latest ${{ secrets.ECR_URL }}:latest
       - name: aws authentication
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -49,4 +49,4 @@ jobs:
     steps:
       - name: download to ecr
         run:
-          docker pull ${{ secrets.ECR_URL }}/${{ secrets.ECR_REPOSITRY }}:latest
+          docker pull ${{ secrets.ECR_URL }}/:latest
