@@ -33,6 +33,6 @@ jobs:
           context: .
           file: .docker/prod.Dockerfile
           push: true
-          tags: plll0123/prod
+          tags: prod
         # run:
         #   docker build --file .docker/prod.Dockerfile --tag prod:latest .
