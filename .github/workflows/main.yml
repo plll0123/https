@@ -49,4 +49,4 @@ jobs:
     steps:
       - name: download to ecr
         run:
-          docker pull ${{ secrets.ECR_URL }}/:latest
+          docker pull ${{ secrets.ECR_URL }}:latest
