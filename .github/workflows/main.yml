@@ -28,7 +28,7 @@ jobs:
       - name: docker build
         run: |
           docker build --file .docker/prod.Dockerfile -t prod .
-          docker tag prod:latest ${{ secrets.ECR_URL }}/${{ secrets.ECR_REPOSITORY }}/backend:latest
+          docker tag prod:latest ${{ secrets.ECR_URL }}/backend:latest
       - name: aws authentication
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -37,19 +37,11 @@ jobs:
           aws-region: ap-northeast-2
       - name: authentication aws docker
         run: |
-          echo aws ecr get-login-password --region ap-northeast-2
-          echo aws ecr get-login-password --region ap-northeast-2
-          echo aws ecr get-login-password --region ap-northeast-2
-          echo aws ecr get-login-password --region ap-northeast-2
-          echo aws ecr get-login-password --region ap-northeast-2
-          echo aws ecr get-login-password --region ap-northeast-2
-          echo aws ecr get-login-password --region ap-northeast-2
-          echo aws ecr get-login-password --region ap-northeast-2
           aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin ${{ secrets.ECR_URL }}
 
       - name: push image
         run: |
-          docker push ${{ secrets.ECR_URL }}/${{ secrets.ECR_REPOSITORY }}/backend:latest
+          docker push ${{ secrets.ECR_URL }}/backend:latest
 
   deployment:
     needs: build
