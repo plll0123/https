@@ -27,7 +27,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: docker build
         run:
-          docker build . --file .docker/prod.Dockerfile -t prod
+          docker build --file .docker/prod.Dockerfile -t prod .
           docker tag prod:latest ${{ secrets.ECR_URL }}/prod:latest
       - name: aws authentication
         uses: aws-actions/configure-aws-credentials@v4
