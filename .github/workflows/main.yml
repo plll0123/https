@@ -50,3 +50,10 @@ jobs:
       - name: push image
         run: |
           docker push ${{ secrets.ECR_URL }}/${{ secrets.ECR_REPOSITORY }}:latest
+
+  deployment:
+    runs-on: https-hosts
+    steps:
+      - name: download to ecr
+        run:
+          docker pull ${{ secrets.ECR_URL }}/${{ secrets.ECR_REPOSITRY }}:latest
