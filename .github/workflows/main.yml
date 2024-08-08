@@ -36,5 +36,5 @@ jobs:
           aws-region: ap-northeast-2
       - name: push image
         run: |
-          docker push 
+          docker push ${{ secrets.ECR_URL }}/${{ secrets.ECR_REPOSITORY }}
         
