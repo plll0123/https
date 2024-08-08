@@ -1,13 +1,15 @@
 spring:
   application.name: https
 
-#server:
-#  port: 8443
-#  ssl:
-#    key-store: ./keystore.p12
-#    key-store-password: rootroot
-#    key-store-type: PKCS12
-#    key-alias: testkey
+server:
+  port: 8443
+  ssl:
+    key-store: ./keystore.p12
+    key-store-password: rootroot
+    key-store-type: PKCS12
+    key-alias: testkey
+toss:
+  secret: test_gsk_docs_OaPz8L5KdmQXkzRz3y47BMw6
 hello: default
 ---
 spring.config.activate.on-profile: prod
