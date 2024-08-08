@@ -14,6 +14,8 @@ class TossApiWrapper (
         val encode = Base64.getEncoder().encode("$secret:".toByteArray())
         val s = "Basic " + String(encode)
         val paymentInfo = tossApi.paymentInfo(s, key)
+        println("s = $s")
+        println("key = $key")
         val execute = paymentInfo.execute()
         println("execute = ${execute.body()}")
         println(execute.code())
