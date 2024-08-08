@@ -16,5 +16,7 @@ class TossApiWrapper (
         val paymentInfo = tossApi.paymentInfo(s, key)
         val execute = paymentInfo.execute()
         println("execute = ${execute.body()}")
+        println(execute.code())
+        println(execute.headers())
     }
 }
