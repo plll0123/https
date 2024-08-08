@@ -28,7 +28,7 @@ jobs:
       - name: docker build
         run: |
           docker build --file .docker/prod.Dockerfile -t prod .
-          docker tag prod:latest ${{ secrets.ECR_URL }}/${{ secrets.ECR_REPOSITORY }}https-test:latest
+          docker tag prod:latest ${{ secrets.ECR_URL }}/${{ secrets.ECR_REPOSITORY }}:latest
       - name: aws authentication
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -49,9 +49,10 @@ jobs:
 
       - name: push image
         run: |
-          docker push ${{ secrets.ECR_URL }}/${{ secrets.ECR_REPOSITORY }}https-test:latest
+          docker push ${{ secrets.ECR_URL }}/${{ secrets.ECR_REPOSITORY }}:latest
 
   deployment:
+    needs: build
     runs-on: https-hosts
     steps:
       - name: download to ecr
