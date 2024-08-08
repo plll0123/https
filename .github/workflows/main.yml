@@ -35,6 +35,10 @@ jobs:
           aws-access-key-id: ${{ secrets.ECR_ACCESS }}
           aws-secret-access-key: ${{ secrets.ECR_PRIVATE }}
           aws-region: ap-northeast-2
+      - name: authentication aws docker
+        run: |
+          aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin ${{ secrets.ECR_URL }}
+          
       - name: push image
         run: |
           docker push ${{ secrets.ECR_URL }}/prod:latest
