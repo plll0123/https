@@ -47,6 +47,10 @@ jobs:
     needs: build
     runs-on: https-hosts
     steps:
+      - name: has aws cli
+        run: |
+          command -v aws
+
       - name: aws authentication
         uses: aws-actions/configure-aws-credentials@v4
         with:
