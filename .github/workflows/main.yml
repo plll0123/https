@@ -5,7 +5,7 @@ on: push
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps: 
+    steps:
 
       - name: checkout
         uses: actions/checkout@v4
@@ -28,3 +28,13 @@ jobs:
       - name: docker build
         run:
           docker build . --file .docker/prod.Dockerfile --tag plll0123/prod
+      - name: aws authentication
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.ECR_ACCESS }}
+          aws-secret-access-key: ${{ secrets.ECR_PRIVATE }}
+          aws-region: ap-northeast-2
+      - name: push image
+        run: |
+          docker push 
+        
