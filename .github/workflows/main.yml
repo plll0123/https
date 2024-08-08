@@ -26,6 +26,11 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       
-      - name: docker build
-        run:
-          docker build --file .docker/prod.Dockerfile --tag prod:latest .
+      - name: docker build, push
+        uses: docker/build-push-action@v6
+        with:
+          context: .docker/prod.Dockerfile
+          push: true
+          tags: plll0123/prod
+        # run:
+        #   docker build --file .docker/prod.Dockerfile --tag prod:latest .
