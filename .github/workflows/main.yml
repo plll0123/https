@@ -41,7 +41,7 @@ jobs:
 
       - name: push image
         run: |
-          docker push ${{ secrets.ECR_URL }}/backend:latest
+          docker push ${{ secrets.ECR_URL }}:latest
 
   deployment:
     needs: build
