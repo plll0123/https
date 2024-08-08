@@ -27,7 +27,8 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: docker build
         run:
-          docker build . --file .docker/prod.Dockerfile --tag plll0123/prod
+          docker build . --file .docker/prod.Dockerfile -t prod
+          docker tag prod:latest ${{ secrets.ECR_URL }}/prod:latest
       - name: aws authentication
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -36,5 +37,5 @@ jobs:
           aws-region: ap-northeast-2
       - name: push image
         run: |
-          docker push plll0123/prod
+          docker push ${{ secrets.ECR_URL }}/prod:latest
         
