@@ -2,6 +2,7 @@ on:
   push:
     paths:
       - client/**
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -33,7 +34,7 @@ jobs:
       - name: build docker and push
         run: |
           aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin ${{ secrets.ECR_URL }}
-          docker build --file .docker/client-app.Dockerfile -t client-app .
+          docker build --file .docker/client-app.Dockerfile -t client-app:latest .
           docker tag client-app:latest ${{ secrets.ECR_URL }}:latest
           docker push ${{ secrets.ECR_URL }}:latest
 
@@ -59,3 +60,17 @@ jobs:
           else
               echo "AWS CLI is already installed."
           fi
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.ECR_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.ECR_PRIVATE_KEY }}
+          aws-region: ap-northeast-2
+
+      - name: pull image
+        run: |
+          aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin ${{ secrets.ECR_URL }}
+          docker pull ${{ secrets.ECR_URL }}:latest
+#
+#      - name: docker run
+#        run: |
