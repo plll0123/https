@@ -1,11 +1,11 @@
-package com.example.https
+package com.example.ecc_test
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class HttpsApplication
+class ClientApplicationTest
 
 fun main(args: Array<String>) {
-	runApplication<HttpsApplication>(*args)
+    runApplication<ClientApplicationTest>(*args)
 }
