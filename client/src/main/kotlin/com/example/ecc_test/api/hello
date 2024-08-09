@@ -7,3 +7,5 @@ add aws credential step
 push docker image
 
 execute host runner
+
+pull image ( host runner )
