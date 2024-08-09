@@ -3,7 +3,7 @@ name: admin app build
 on:
   push:
     paths:
-      - admin
+      - admin/**
 jobs:
   test:
     runs-on: ubuntu-latest
