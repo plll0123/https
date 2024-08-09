@@ -6,6 +6,15 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: hello
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: java build
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+          cache: 'gradle'
+      - name: project build
         run:
-          hello client
+          chmod +x gradlew && ./gradlew clean build
