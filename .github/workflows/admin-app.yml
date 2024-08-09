@@ -1,6 +1,16 @@
-#name: http goals
-#
-#on: push
+name: admin app build
+
+on:
+  push:
+    paths:
+      - admin
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: hello
+        run:
+          hello admin
 #
 #jobs:
 #  build:
@@ -27,7 +37,7 @@
 #      #     password: ${{ secrets.DOCKER_PASSWORD }}
 #      - name: docker build
 #        run: |
-#          docker build --file .docker/prod.Dockerfile -t prod .
+#          docker build --file .docker/admin-app.Dockerfile -t prod .
 #          docker tag prod:latest ${{ secrets.ECR_URL }}:latest
 #      - name: aws authentication
 #        uses: aws-actions/configure-aws-credentials@v4

@@ -1,0 +1,13 @@
+name: admin app build
+
+on:
+  push:
+    paths:
+      - client
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: hello
+        run:
+          hello client
