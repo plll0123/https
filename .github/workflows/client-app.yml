@@ -1,4 +1,4 @@
-name: admin app build
+name: client app build
 
 on:
   push:
