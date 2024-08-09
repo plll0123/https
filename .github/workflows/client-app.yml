@@ -30,7 +30,9 @@ jobs:
           aws-secret-access-key: ${{ secrets.ECR_PRIVATE_KEY }}
           aws-region: ap-northeast-2
 
-      - name: docker image build and push aws
+      - name: build docker and push
         run: |
-          docker build --file .docker/client-app.Dockerfile -t plll0123 .
-          aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin ${{ secrets.ECR_URL }} 
+          aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin ${{ secrets.ECR_URL }}
+          docker build --file .docker/client-app.Dockerfile -t client-app .
+          docker tag client-app:latest ${{ secrets.ECR_URL }}:latest
+          docker push ${{ secrets.ECR_URL }}:latest

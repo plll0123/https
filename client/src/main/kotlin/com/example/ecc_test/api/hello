@@ -3,3 +3,5 @@ build docker
 add run command step
 
 add aws credential step
+
+push docker image
