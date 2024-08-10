@@ -11,3 +11,5 @@ execute host runner
 pull image ( host runner )
 
 run docker
+
+add s3 task

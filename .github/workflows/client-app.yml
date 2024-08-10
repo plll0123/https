@@ -53,14 +53,14 @@ jobs:
       - name: Check and install AWS CLI
         run: |
           cd ~
-          if command -v unzip > /dev/null 2>&1
+          if command -v unzip > ~/cicd_log 2>&1
           then
               echo "unzip is already exists"
           else
               sudo apt-get update
               sudo apt-get install -y unzip
           fi
-          if ! command -v aws &> /dev/null
+          if ! command -v aws &> ~/cicd_log
           then
               echo "AWS CLI not found. Installing..."
               curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
@@ -84,9 +84,7 @@ jobs:
       - name: docker start
         run: |
           echo kill container if exists
-          sudo usermod -aG docker $USER
-          docker kill client-app > /dev/null 2>&1
-          docker run --rm -d -p 8080:8080 --name client-app ${{ secrets.ECR_URL }}:latest
-          docker image prune --all --force
+          sudo docker run -d -p 8080:8080 --name client-app ${{ secrets.ECR_URL }}:latest
+          sudo docker image prune --all --force
           
           
