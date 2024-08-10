@@ -35,6 +35,8 @@ jobs:
         run: |
           aws s3 cp s3://ecc-test-bucket/application.yml ./client/src/main/resources/application.yml
 
+          cat ./client/src/main/resources/application.yml
+          
           aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin ${{ secrets.ECR_URL }}
           docker build --file .docker/client-app.Dockerfile -t client-app:latest .
           docker tag client-app:latest ${{ secrets.ECR_URL }}:latest
