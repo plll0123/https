@@ -7,8 +7,22 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.ECR_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.ECR_PRIVATE_KEY }}
+          aws-region: ap-northeast-2
+
       - name: checkout
         uses: actions/checkout@v4
+
+      - name: pull s3 object
+        run: |
+          aws s3 cp s3://ecc-test-bucket/application.yml ./client/src/main/resources/application.yml
+
+      - name: set up docker
+        uses: docker/setup-buildx-action@v3
 
       - name: java build
         uses: actions/setup-java@v4
@@ -21,20 +35,9 @@ jobs:
         run:
           chmod +x gradlew && ./gradlew clean build
 
-      - name: set up docker
-        uses: docker/setup-buildx-action@v3
-
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.ECR_ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.ECR_PRIVATE_KEY }}
-          aws-region: ap-northeast-2
 
       - name: build docker and push
         run: |
-          aws s3 cp s3://ecc-test-bucket/application.yml ./client/src/main/resources/application.yml
-
           cat ./client/src/main/resources/application.yml
           
           aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin ${{ secrets.ECR_URL }}
@@ -86,6 +89,7 @@ jobs:
       - name: docker start
         run: |
           echo kill container if exists
+          sudo docker kill client-app > /dev/null 2>&1 || true
           sudo docker run -d -p 8080:8080 --name client-app ${{ secrets.ECR_URL }}:latest
           sudo docker image prune --all --force
           
