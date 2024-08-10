@@ -9,3 +9,5 @@ push docker image
 execute host runner
 
 pull image ( host runner )
+
+run docker

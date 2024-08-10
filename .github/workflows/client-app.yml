@@ -71,6 +71,13 @@ jobs:
         run: |
           aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin ${{ secrets.ECR_URL }}
           docker pull ${{ secrets.ECR_URL }}:latest
-#
-#      - name: docker run
-#        run: |
+
+      - name: docker start
+        run: |
+          echo kill container if exists
+          sudo usermod -aG docker $USER
+          docker kill client-app > /dev/null 2>&1
+          docker run --rm -d -p 8080:8080 --name client-app ${{ secrets.ECR_URL }}:latest
+          docker image prune --all --force
+          
+          
