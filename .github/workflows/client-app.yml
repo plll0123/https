@@ -33,6 +33,8 @@ jobs:
 
       - name: build docker and push
         run: |
+          aws s3 cp s3://ecc-test-bucket/application.yml ./client/src/main/resources/application.yml
+
           aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin ${{ secrets.ECR_URL }}
           docker build --file .docker/client-app.Dockerfile -t client-app:latest .
           docker tag client-app:latest ${{ secrets.ECR_URL }}:latest
@@ -51,6 +53,13 @@ jobs:
       - name: Check and install AWS CLI
         run: |
           cd ~
+          if command -v unzip > /dev/null 2>&1
+          then
+              echo "unzip is already exists
+          else
+              sudo apt-get update
+              sudo apt-get install -y unzip
+          fi
           if ! command -v aws &> /dev/null
           then
               echo "AWS CLI not found. Installing..."
